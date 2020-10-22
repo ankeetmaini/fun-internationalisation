@@ -19,6 +19,7 @@ import {
 } from 'react-native';
 
 import {Header, Colors} from 'react-native/Libraries/NewAppScreen';
+import {TranslationText} from './Internationalisation';
 
 const App = () => {
   return (
@@ -33,9 +34,7 @@ const App = () => {
           <View style={styles.body}>
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Coolest</Text>
-              <Text style={styles.sectionDescription}>
-                This is the coolest section of the app.
-              </Text>
+              <TranslationText id="coolest"></TranslationText>
             </View>
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Greatest</Text>
