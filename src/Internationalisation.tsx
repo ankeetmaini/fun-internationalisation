@@ -11,8 +11,17 @@ const createContext = (lang: Languages) => {
     hindi: HindiStrings,
   };
 
-  function translate(id: string): string {
-    return translations[lang][id];
+  function translate(id: string, attrs: Record<string, string>): string {
+    let message = translations[lang][id];
+    const interpolations = message && message.match(/{{[a-z]+}}/g);
+    if (interpolations) {
+      interpolations.forEach((interpolation) => {
+        const placeholder = interpolation.slice(2, -2);
+        message = message.replace(interpolation, attrs[placeholder]);
+      });
+      return message;
+    }
+    return message;
   }
 
   return {
@@ -33,7 +42,10 @@ export const InternationalisationProvider: React.FC = ({children}) => {
   );
 };
 
-export const TranslationText: React.FC<{id: string}> = ({id}) => {
+export const TranslationText: React.FC<{
+  id: string;
+  attrs: Record<string, string>;
+}> = ({id, attrs}) => {
   const {translate} = useContext(Context);
-  return <Text>{translate(id)}</Text>;
+  return <Text>{translate(id, attrs)}</Text>;
 };

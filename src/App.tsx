@@ -42,6 +42,15 @@ const App = () => {
                 And this is the greatest
               </Text>
             </View>
+            <View style={styles.sectionContainer}>
+              <Text style={styles.sectionTitle}>Interpolations</Text>
+              <TranslationText
+                id="discount"
+                attrs={{
+                  name: 'Ankeet',
+                  discount: 20,
+                }}></TranslationText>
+            </View>
           </View>
         </ScrollView>
       </SafeAreaView>

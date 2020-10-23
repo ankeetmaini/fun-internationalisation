@@ -1,5 +1,6 @@
 {
   "hi": "hi",
   "coolest": "coolest",
-  "greatest": "greatest"
+  "greatest": "greatest",
+  "discount": "Hi {{name}}, {{discount}}% valid for today only"
 }
