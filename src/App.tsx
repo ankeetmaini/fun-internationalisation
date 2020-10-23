@@ -34,13 +34,19 @@ const App = () => {
           <View style={styles.body}>
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Coolest</Text>
-              <TranslationText id="coolest"></TranslationText>
+              <TranslationText
+                id="discount"
+                attrs={{name: 'aaadf', discount: '23'}}></TranslationText>
             </View>
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Greatest</Text>
               <Text style={styles.sectionDescription}>
                 And this is the greatest
               </Text>
+              <TranslationText
+                id="long"
+                attrs={{placeholder: 'nothing here'}}
+              />
             </View>
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Interpolations</Text>
@@ -48,7 +54,7 @@ const App = () => {
                 id="discount"
                 attrs={{
                   name: 'Ankeet',
-                  discount: 20,
+                  discount: 20 + '',
                 }}></TranslationText>
             </View>
           </View>
