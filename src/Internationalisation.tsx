@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {Text} from 'react-native';
 import * as EnglishStrings from '../messages/en.json';
 import * as HindiStrings from '../messages/hindi.json';
-import {AllKeys} from './types';
+import {AllKeys, GetTranslationTextType} from './types';
 
 type Languages = 'en' | 'hindi';
 
@@ -12,10 +12,13 @@ const createContext = (lang: Languages) => {
     hindi: HindiStrings,
   };
 
-  function translate(id: AllKeys, attrs: Record<string, string>): string {
+  function translate(
+    id: AllKeys,
+    attrs: Record<string, string> | undefined,
+  ): string {
     let message = translations[lang][id];
     const interpolations = message && message.match(/{{[a-z]+}}/g);
-    if (interpolations) {
+    if (interpolations && attrs) {
       interpolations.forEach((interpolation) => {
         const placeholder = interpolation.slice(2, -2);
         message = message.replace(interpolation, attrs[placeholder]);
@@ -43,10 +46,10 @@ export const InternationalisationProvider: React.FC = ({children}) => {
   );
 };
 
-export const TranslationText: React.FC<{
-  id: AllKeys;
-  attrs: Record<string, string>;
-}> = ({id, attrs}) => {
+type Props<T> = GetTranslationTextType<T> extends never
+  ? {id: T} & {attrs?: never}
+  : {id: T} & {attrs: GetTranslationTextType<T>};
+export function TranslationText<T extends AllKeys>({id, attrs}: Props<T>) {
   const {translate} = useContext(Context);
   return <Text>{translate(id, attrs)}</Text>;
-};
+}

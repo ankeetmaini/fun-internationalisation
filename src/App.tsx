@@ -34,7 +34,9 @@ const App = () => {
           <View style={styles.body}>
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Coolest</Text>
-              <TranslationText id="coolest"></TranslationText>
+              <TranslationText
+                id="discount"
+                attrs={{name: 'aaadf', discount: '100'}}></TranslationText>
             </View>
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Greatest</Text>
@@ -48,7 +50,7 @@ const App = () => {
                 id="discount"
                 attrs={{
                   name: 'Ankeet',
-                  discount: 20,
+                  discount: 20 + '',
                 }}></TranslationText>
             </View>
           </View>
