@@ -11,16 +11,8 @@ const createContext = (lang: Languages) => {
     hindi: HindiStrings,
   };
 
-  function translate(id: string, attrs: Record<string, string>): string {
+  function translate(id: string): string {
     let message = translations[lang][id];
-    const interpolations = message && message.match(/{{[a-z]+}}/g);
-    if (interpolations) {
-      interpolations.forEach((interpolation) => {
-        const placeholder = interpolation.slice(2, -2);
-        message = message.replace(interpolation, attrs[placeholder]);
-      });
-      return message;
-    }
     return message;
   }
 
@@ -35,7 +27,7 @@ const Context = React.createContext(createContext('en'));
 export const InternationalisationProvider: React.FC = ({children}) => {
   return (
     <>
-      <Context.Provider value={createContext('en')}>
+      <Context.Provider value={createContext('hindi')}>
         {children}
       </Context.Provider>
     </>
@@ -44,8 +36,7 @@ export const InternationalisationProvider: React.FC = ({children}) => {
 
 export const TranslationText: React.FC<{
   id: string;
-  attrs: Record<string, string>;
-}> = ({id, attrs}) => {
+}> = ({id}) => {
   const {translate} = useContext(Context);
-  return <Text>{translate(id, attrs)}</Text>;
+  return <Text>{translate(id)}</Text>;
 };
