@@ -2,5 +2,7 @@
   "hi": "hi",
   "coolest": "coolest",
   "greatest": "greatest",
-  "discount": "Hi {{name}}, {{discount}}% valid for today only"
+  "discount": "Hi {{name}}, {{discount}}% valid for today only",
+  "yo": "this is yo",
+  "long": "This is another message, needs a {{placeholder}}"
 }

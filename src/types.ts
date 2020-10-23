@@ -1,9 +1,8 @@
-export type AllKeys = "hi" | "coolest" | "greatest" | "discount";
-
-
-export type GetTranslationTextType<T> = 
-T extends "hi" ? never :
-T extends "coolest" ? never :
-T extends "greatest" ? never :
-T extends "discount" ? { name: string,discount: string } :
-never;
+export interface KeyMap { 
+  hi: never,
+coolest: never,
+greatest: never,
+discount: { name: string,discount: string },
+yo: never,
+long: { placeholder: string }
+ }

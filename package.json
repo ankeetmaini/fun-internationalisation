@@ -5,11 +5,13 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start",
+    "watch": "node watch.js",
+    "start": "yarn watch & react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "node-watch": "^0.7.0",
     "react": "16.13.1",
     "react-native": "0.63.3"
   },
