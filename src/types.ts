@@ -1,0 +1,1 @@
+export type AllKeys = "hi" | "coolest" | "greatest" | "discount"
