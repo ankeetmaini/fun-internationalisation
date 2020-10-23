@@ -1,8 +1,7 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {Text} from 'react-native';
 import * as EnglishStrings from '../messages/en.json';
 import * as HindiStrings from '../messages/hindi.json';
-import {AllKeys} from './types';
 
 type Languages = 'en' | 'hindi';
 
@@ -12,7 +11,7 @@ const createContext = (lang: Languages) => {
     hindi: HindiStrings,
   };
 
-  function translate(id: AllKeys, attrs: Record<string, string>): string {
+  function translate(id: string, attrs: Record<string, string>): string {
     let message = translations[lang][id];
     const interpolations = message && message.match(/{{[a-z]+}}/g);
     if (interpolations) {
@@ -28,15 +27,21 @@ const createContext = (lang: Languages) => {
   return {
     lang,
     translate,
+    changeLanguage: (l: Languages) => {},
   };
 };
 
-const Context = React.createContext(createContext('en'));
+export const Context = React.createContext(createContext('en'));
 
 export const InternationalisationProvider: React.FC = ({children}) => {
+  const [context, setContext] = useState(createContext('en'));
   return (
     <>
-      <Context.Provider value={createContext('en')}>
+      <Context.Provider
+        value={{
+          ...context,
+          changeLanguage: (l: Languages) => setContext(createContext(l)),
+        }}>
         {children}
       </Context.Provider>
     </>
@@ -44,7 +49,7 @@ export const InternationalisationProvider: React.FC = ({children}) => {
 };
 
 export const TranslationText: React.FC<{
-  id: AllKeys;
+  id: string;
   attrs: Record<string, string>;
 }> = ({id, attrs}) => {
   const {translate} = useContext(Context);

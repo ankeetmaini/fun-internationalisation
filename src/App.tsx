@@ -8,7 +8,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -16,12 +16,14 @@ import {
   View,
   Text,
   StatusBar,
+  Button,
 } from 'react-native';
 
 import {Header, Colors} from 'react-native/Libraries/NewAppScreen';
-import {TranslationText} from './Internationalisation';
+import {TranslationText, Context} from './Internationalisation';
 
 const App = () => {
+  const {changeLanguage} = useContext(Context);
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -34,7 +36,7 @@ const App = () => {
           <View style={styles.body}>
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Coolest</Text>
-              <TranslationText id="coolest"></TranslationText>
+              <TranslationText id="coolest" attrs={{}}></TranslationText>
             </View>
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Greatest</Text>
@@ -52,6 +54,12 @@ const App = () => {
                 }}></TranslationText>
             </View>
           </View>
+          <View style={styles.sectionContainer}></View>
+          <Button title="EN" onPress={() => changeLanguage('en')}></Button>
+          <View style={styles.sectionContainer}></View>
+          <Button
+            title="HINDI"
+            onPress={() => changeLanguage('hindi')}></Button>
         </ScrollView>
       </SafeAreaView>
     </>
