@@ -11,7 +11,7 @@ const createContext = (lang: Languages) => {
     hindi: HindiStrings,
   };
 
-  function translate(id: string, attrs: Record<string, string>): string {
+  function translate(id: string, attrs: Record<string, any>): string {
     let message = translations[lang][id];
     const interpolations = message && message.match(/{{[a-z]+}}/g);
     if (interpolations) {
