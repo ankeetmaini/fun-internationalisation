@@ -50,7 +50,7 @@ export const InternationalisationProvider: React.FC = ({children}) => {
 
 export const TranslationText: React.FC<{
   id: string;
-  attrs: Record<string, string>;
+  attrs: Record<string, any>;
 }> = ({id, attrs}) => {
   const {translate} = useContext(Context);
   return <Text>{translate(id, attrs)}</Text>;

@@ -8,7 +8,3 @@ const types = [
 ];
 
 const allKeys = Object.keys(base);
-
-types.push(`export type AllKeys = ${allKeys.map((k) => `"${k}"`).join(' | ')}`);
-
-fs.writeFileSync(path.resolve(__dirname, 'src', 'types.ts'), types.join('\n'));
