@@ -2,8 +2,8 @@ import React, {useContext} from 'react';
 import {Text} from 'react-native';
 import * as EnglishStrings from '../messages/en.json';
 import * as HindiStrings from '../messages/hindi.json';
-import {AllKeys, GetTranslationTextType} from './types';
-
+import {KeyMap} from './types';
+type AllKeys = keyof KeyMap;
 type Languages = 'en' | 'hindi';
 
 const createContext = (lang: Languages) => {
@@ -46,9 +46,10 @@ export const InternationalisationProvider: React.FC = ({children}) => {
   );
 };
 
-type Props<T> = GetTranslationTextType<T> extends never
+type Props<T extends AllKeys> = KeyMap[T] extends never
   ? {id: T} & {attrs?: never}
-  : {id: T} & {attrs: GetTranslationTextType<T>};
+  : {id: T} & {attrs: KeyMap[T]};
+
 export function TranslationText<T extends AllKeys>({id, attrs}: Props<T>) {
   const {translate} = useContext(Context);
   return <Text>{translate(id, attrs)}</Text>;
